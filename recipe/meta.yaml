@@ -1,6 +1,6 @@
 {% set name = "pySOT" %}
-{% set version = "0.1.36" %}
-{% set sha256 = "043655621466d89328cac80a5c87f050c4b4708a79ec29b5912b79c76393504a" %}
+{% set version = "0.2.0" %}
+{% set sha256 = "3f0d8a10580f0a9a71af22e826f08007dfa8665e6610409f6a7ca1eb900d36a2" %}
 
 package:
   name: {{ name|lower }}
