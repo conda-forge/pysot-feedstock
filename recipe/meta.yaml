@@ -32,6 +32,7 @@ requirements:
     - poap >=0.1.25
     - py_dempster_shafer
     - six
+    - dill
 
 test:
   imports:
