@@ -33,6 +33,7 @@ requirements:
     - py_dempster_shafer
     - six
     - dill
+    - pytest
 
 test:
   imports:
