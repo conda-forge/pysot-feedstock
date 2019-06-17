@@ -31,6 +31,7 @@ requirements:
     - pydoe2
     - poap >=0.1.25
     - py_dempster_shafer
+    - six
 
 test:
   imports:
