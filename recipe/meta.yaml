@@ -1,6 +1,6 @@
 {% set name = "pySOT" %}
-{% set version = "0.1.36" %}
-{% set sha256 = "043655621466d89328cac80a5c87f050c4b4708a79ec29b5912b79c76393504a" %}
+{% set version = "0.2.2" %}
+{% set sha256 = "a4817705fa40e8c4d3b5e5a42445036c2a966224b0d45f1c5f66d7c9c4d78455" %}
 
 package:
   name: {{ name|lower }}
@@ -21,38 +21,38 @@ requirements:
     - python
     - setuptools
     - scipy
-    - pydoe
+    - pydoe2
     - poap >=0.1.25
     - py_dempster_shafer
 
   run:
     - python
     - scipy
-    - pydoe
+    - pydoe2
     - poap >=0.1.25
     - py_dempster_shafer
+    - six
+    - dill
+    - pytest
 
 test:
   imports:
     - pySOT
-    - pySOT.test
+    - pySOT.tests
 
   source_files:
-    - pySOT/test
+    - pySOT/tests
 
   commands:
     - cd pySOT
-    - cd test
-    - python test_simple.py
-    - python test_simple_time.py
-    - python test_rbf.py
-    - python test_penalty.py
-    - python test_projection.py
-    - python test_ensemble.py
-    - python test_gp_regression.py
-    - python test_mixed_integer_constraints.py
-    - python test_multisampling.py
-    - python test_extra_vals.py
+    - cd tests
+    - python test_auxiliary_problems.py
+    - python test_controller.py
+    - python test_experimental_designs.py
+    - python test_optimization_problems.py
+    - python test_strategies.py
+    - python test_surrogates.py
+    - python test_utils.py
     
   requires:
     - scikit-learn ==0.18.1
@@ -75,3 +75,4 @@ about:
 extra:
   recipe-maintainers:
     - tadeu
+    - jaimeambrus
