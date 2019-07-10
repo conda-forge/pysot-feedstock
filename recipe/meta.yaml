@@ -13,17 +13,16 @@ source:
 
 build:
   noarch: python
-  number: 0
-  script: python setup.py install --single-version-externally-managed --record record.txt
+  number: 1
+  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
 
 requirements:
-  build:
+  host:
+    - pip
     - python
-    - setuptools
-    - scipy
-    - pydoe2
-    - poap >=0.1.25
-    - py_dempster_shafer
+    # `numpy` is required to avoid the following error during `pip install`:
+    # RuntimeError: Setuptools downloading is disabled in conda build. Be sure to add all dependencies in the meta.yaml
+    - numpy
 
   run:
     - python
@@ -53,10 +52,10 @@ test:
     - python test_strategies.py
     - python test_surrogates.py
     - python test_utils.py
-    
+
   requires:
-    - scikit-learn ==0.18.1
-    
+    - scikit-learn
+
 about:
   home: https://github.com/dme65/pySOT
   license: BSD 3-Clause
