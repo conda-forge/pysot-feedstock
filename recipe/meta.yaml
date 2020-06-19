@@ -1,6 +1,6 @@
 {% set name = "pySOT" %}
-{% set version = "0.2.3" %}
-{% set sha256 = "025162c3eaacd073774d28662dacb689720d2e22a6911b9ae7722ac63a8bc14c" %}
+{% set version = "0.3.2" %}
+{% set sha256 = "9df2dc1ff9f1517530b81cae39a6af0626355423ed3b1b56df2d68b4a2720745" %}
 
 package:
   name: {{ name|lower }}
@@ -13,8 +13,8 @@ source:
 
 build:
   noarch: python
-  number: 1
-  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
+  number: 0
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
   host:
@@ -61,7 +61,7 @@ about:
   license: BSD 3-Clause
   license_family: BSD
   license_file: LICENSE.rst
-  summary: 'Surrogate Optimization Toolbox'
+  summary: Surrogate Optimization Toolbox
   description: |
     pySOT is an asynchronous parallel optimization toolbox for global deterministic optimization problems. The main purpose of
     the toolbox is for optimization of computationally expensive black-box objective functions with continuous and/or integer
