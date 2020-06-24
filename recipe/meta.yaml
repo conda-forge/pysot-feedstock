@@ -1,6 +1,6 @@
 {% set name = "pySOT" %}
 {% set version = "0.3.3" %}
-{% set sha256 = "877b43548661c40258d3de839f1c9866a92c5bce7c9e0ed1e73b685bdfbd0083" %}
+{% set sha256 = "9214b7f47237dedf8b7004488c6fc1d8248ae304a4af596379e8f87d89a71f3d" %}
 
 package:
   name: {{ name|lower }}
@@ -8,7 +8,8 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  # getting source from GitHub release instead of PyPI because it includes tests (and examples)
+  url: https://github.com/dme65/{{ name }}/archive/v{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
@@ -16,11 +17,6 @@ build:
   number: 0
   script:
     - {{ PYTHON }} -m pip install . --no-deps -vv
-    # pySOT is wrongly installing `examples` and `tests` at site-packages level
-    - move "%SP_DIR%\examples" "%SP_DIR%\pySOT"  # [win]
-    - mv "$SP_DIR/examples" "$SP_DIR/pySOT"  # [not win]
-    - move "%SP_DIR%\tests" "%SP_DIR%\pySOT"  # [win]
-    - mv "$SP_DIR/tests" "$SP_DIR/pySOT"  # [not win]
 
 requirements:
   host:
@@ -37,24 +33,21 @@ requirements:
     - py_dempster_shafer
     - six
     - dill
-    - pytest
 
 test:
+  requires:
+    - pytest  # even though it is declared as a dependency in setup.py, it is used only by tests
+
   imports:
     - pySOT
-    - pySOT.tests
+
+  source_files:
+    - tests
 
   commands:
-    - cd "%SP_DIR%\pySOT\tests"  # [win]
-    - cd "$SP_DIR/pySOT/tests"  # [not win]
-    - python test_auxiliary_problems.py
     # test_controller.py was removed because it was failing with the message:
     #     Cannot create a file when that file already exists: 'temp_checkpoint.pysot' -> 'checkpoint.pysot'
-    - python test_experimental_designs.py
-    - python test_optimization_problems.py
-    - python test_strategies.py
-    - python test_surrogates.py
-    - python test_utils.py
+    - pytest tests -k "not test_checkpoint_serial"
 
   requires:
     - scikit-learn
