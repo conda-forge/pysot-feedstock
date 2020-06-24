@@ -35,22 +35,17 @@ requirements:
     - dill
 
 test:
-  requires:
-    - pytest  # even though it is declared as a dependency in setup.py, it is used only by tests
-
   imports:
     - pySOT
-
   source_files:
     - tests
-
+  requires:
+    - pytest  # even though it is declared as a dependency in setup.py, it is used only by tests
+    - scikit-learn
   commands:
     # test_controller.py was removed because it was failing with the message:
     #     Cannot create a file when that file already exists: 'temp_checkpoint.pysot' -> 'checkpoint.pysot'
     - pytest tests -k "not test_checkpoint_serial"
-
-  requires:
-    - scikit-learn
 
 about:
   home: https://github.com/dme65/pySOT
