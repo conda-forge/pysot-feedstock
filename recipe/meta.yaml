@@ -54,7 +54,7 @@ test:
 
 about:
   home: https://github.com/dme65/pySOT
-  license: BSD 3-Clause
+  license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE.rst
   summary: Surrogate Optimization Toolbox
